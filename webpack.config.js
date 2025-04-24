@@ -8,7 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    clean: true,
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -28,6 +28,35 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      
+{
+  test: /\.(png|jpe?g|gif|svg)$/i,
+          type: 'asset/resource',
+
+         /* use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[path][name].[ext]',
+              },
+            }, */
+            /* {
+              loader: 'image-webpack-loader',
+              options: {
+                disable: true, // Disable during development
+              },
+            }, */
+            /* {
+    
+loader: 'url-loader',
+            options: {
+              limit: 10000, // Convert images < 10kb to base64 strings
+              mimetype: 'image/jpg',
+                },
+              },
+    */    
+          //],
+        },
     ],
   },
   plugins: [
