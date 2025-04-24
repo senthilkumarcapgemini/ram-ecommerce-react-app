@@ -1,8 +1,19 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { logoutUser } from '../redux/action';
 
-const Navbar = () => {
+
+const Navbar = () => {   
+    const user = useSelector((state) => state.user.user);
+    const dispatch = useDispatch();
+
+    
+    const handleLogout = () => {
+        dispatch(logoutUser());
+    };
+
+        
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
             <div className="container">
@@ -24,9 +35,18 @@ const Navbar = () => {
                         </li>
                     </ul>
                     <div className="buttons text-center">
+            {user ? (
+                    <>
+                        <span>Welcome, {user.name}</span>
+    <button onClick={handleLogout} className="btn btn-outline-dark m-2"><i className="fa fa-sign-out mr-1"></i> Logout</button>
+                    </>
+                ) : (
+                    <>
                         <NavLink to="/login" className="btn btn-outline-dark m-2"><i className="fa fa-sign-in mr-1"></i> Login</NavLink>
                         <NavLink to="/register" className="btn btn-outline-dark m-2"><i className="fa fa-user-plus mr-1"></i> Register</NavLink>
-                    </div>                
+                    </>
+                    )}
+                        </div>                
                 </div>
             </div>
         </nav>

@@ -18,7 +18,7 @@ const Login = () => {
                 if (user) {
                     alert('Login successful!');        
                     dispatch(loginUser(user)); // Save user data in Redux
-                    navigate('/dashboard'); // Redirect to dashboard or any other page
+                    navigate('/'); // Redirect to dashboard or any other page
                 } else {
                     alert('Invalid email or password');
                 }
