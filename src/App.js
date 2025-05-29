@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from './redux/store';
 import {
   Home,
+  Products, 
   Login,
   Register
 } from "./pages";
@@ -19,6 +20,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/product" element={<Products />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />        
         </Routes>
