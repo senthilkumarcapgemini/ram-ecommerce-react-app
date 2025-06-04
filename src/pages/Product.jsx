@@ -5,7 +5,7 @@ import Marquee from "react-fast-marquee";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 
-import { Navbar } from "../components";
+import { Footer, Navbar } from "../components";
 
 const Product = () => {
   const { id } = useParams();
@@ -186,6 +186,7 @@ const Product = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

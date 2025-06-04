@@ -8,8 +8,13 @@ import store from './redux/store';
 import {
   Home,
   Products, 
+  Product,
+  AboutPage,
+  ContactPage,
+  Cart,
   Login,
-  Register
+  Register,
+  PageNotFound  
 } from "./pages";
 // import store from "./redux/store";
 
@@ -21,15 +26,18 @@ const App = () => {
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<Products />} />
+        <Route path="/product/:id" element={<Product />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/cart" element={<Cart />} />          
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />        
+        <Route path="/register" element={<Register />} />
+          <Route path="*" element={<PageNotFound />} />
+          <Route path="/product/*" element={<PageNotFound />} />                
         </Routes>
     </BrowserRouter>
   </Provider>
     
-   /* <div>
-      <h1>Welcome to the Food Ordering App 🍔</h1>
-    </div> */
   );
 };
 
