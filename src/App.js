@@ -16,13 +16,16 @@ import {
   Register,
   PageNotFound  
 } from "./pages";
+import ScrollToTop from "./components/ScrollToTop";
+import { Toaster } from "react-hot-toast";
 // import store from "./redux/store";
 
 
 const App = () => {
   return (
-    <Provider store={store}>
       <BrowserRouter>
+    <ScrollToTop>
+    <Provider store={store}>
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<Products />} />
@@ -35,8 +38,10 @@ const App = () => {
           <Route path="*" element={<PageNotFound />} />
           <Route path="/product/*" element={<PageNotFound />} />                
         </Routes>
-    </BrowserRouter>
   </Provider>
+    </ScrollToTop>
+    <Toaster />
+    </BrowserRouter>
     
   );
 };

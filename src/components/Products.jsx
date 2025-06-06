@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 
@@ -12,6 +12,9 @@ const Products = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const debounceRef = useRef(null);
+
   let componentMounted = true;
 
   const dispatch = useDispatch();
@@ -19,6 +22,28 @@ const Products = () => {
   const addProduct = (product) => {
     dispatch(addCart(product));
   };
+
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
+      if (value.trim() === "") {
+        setFilter(data);
+      } else {
+        const filtered = data.filter((item) =>
+          item.title.toLowerCase().includes(value.toLowerCase())
+        );
+        setFilter(filtered);
+      }
+    }, 500); // 500ms debounce delay
+  };
+
 
   useEffect(() => {
     const getProducts = async () => {
@@ -165,6 +190,13 @@ const Products = () => {
           <div className="col-12">
             <h2 className="display-5 text-center">Latest Products</h2>
             <hr />
+            <input
+              type="text"
+              className="form-control w-50 mx-auto my-3"
+              placeholder="Search products..."
+              value={searchTerm}
+              onChange={handleSearch}
+            />
           </div>
         </div>
         <div className="row justify-content-center">
